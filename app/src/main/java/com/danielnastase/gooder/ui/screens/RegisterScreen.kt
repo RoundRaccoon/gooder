@@ -2,19 +2,18 @@ package com.danielnastase.gooder.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.danielnastase.gooder.R
 import com.danielnastase.gooder.ui.components.GooderButton
 import com.danielnastase.gooder.ui.components.GooderTextField
+import com.danielnastase.gooder.ui.components.GooderTopAppBar
 import com.danielnastase.gooder.ui.theme.GooderTheme
 import com.danielnastase.gooder.ui.theme.gooderTypography
 
@@ -36,11 +35,7 @@ fun RegisterScreen(
                 .padding(horizontal = 16.dp)
                 .padding(top = 16.dp, bottom = 24.dp)
         ) {
-            Text(
-                text = "Create new account",
-                style = MaterialTheme.gooderTypography.semi_bold_16_24,
-                color = Color.White,
-            )
+            GooderTopAppBar("Create new account")
             Spacer(Modifier.height(56.dp))
             GooderTextField(
                 value = username,
@@ -77,4 +72,10 @@ fun RegisterScreen(
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun DefaultPreview() {
+    RegisterScreen(createAccount = { a, b, c, d -> })
 }

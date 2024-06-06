@@ -18,16 +18,20 @@ class WelcomeActivity : ComponentActivity() {
                 appName = "gooder",
                 logoPainter = painterResource(id = R.drawable.gooder_logo),
                 firstOptionLabel = "Register",
-                firstOptionOnClick = {
-                    startRegisterActivity() },
+                firstOptionOnClick = { startRegisterActivity() },
                 secondOptionLabel = "Login",
-                secondOptionOnClick = {}
+                secondOptionOnClick = { startLoginActivity() }
             )
         }
     }
     private fun startRegisterActivity() {
         val intent = Intent(this, RegisterActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun startLoginActivity() {
+//        val intent = Intent(this, ::class.java)
+//        startActivity(intent)
     }
 }
 
