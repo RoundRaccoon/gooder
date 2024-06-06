@@ -45,7 +45,10 @@ fun GooderTextField(
                     )
                 },
                 colors = TextFieldDefaults.textFieldColors(
+                    textColor = Color.White,
                     containerColor = MaterialTheme.colorScheme.tertiary,
+                    focusedIndicatorColor = MaterialTheme.colorScheme.background,
+                    unfocusedIndicatorColor = MaterialTheme.colorScheme.background,
                 ),
                 shape = RoundedCornerShape(10.dp),
                 singleLine = true,
@@ -53,15 +56,4 @@ fun GooderTextField(
             )
         }
     }
-}
-
-@Preview
-@Composable
-fun DefaultPreview2() {
-    var email by remember { mutableStateOf("") }
-    GooderTextField(
-        value = email,
-        onValueChange = { email = it },
-        title = "Email",
-        placeholder = "What is your email?")
 }
