@@ -14,8 +14,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.danielnastase.gooder.ui.components.OfferCard
+import com.danielnastase.gooder.ui.components.StoreCard
 import com.danielnastase.gooder.ui.components.WelcomeScreen
 import com.danielnastase.gooder.ui.screens.DiscoverScreen
+import com.danielnastase.gooder.ui.screens.StoreScreen
 import com.danielnastase.gooder.ui.theme.EerieBlack
 import com.danielnastase.gooder.ui.theme.GooderTheme
 
@@ -25,14 +27,15 @@ class WelcomeActivity : ComponentActivity() {
         window.statusBarColor = getColor(R.color.black)
 
         setContent {
-            WelcomeScreen(
-                appName = "gooder",
-                logoPainter = painterResource(id = R.drawable.gooder_logo),
-                firstOptionLabel = "Register",
-                firstOptionOnClick = { startRegisterActivity() },
-                secondOptionLabel = "Login",
-                secondOptionOnClick = { startLoginActivity() }
-            )
+//            WelcomeScreen(
+//                appName = "gooder",
+//                logoPainter = painterResource(id = R.drawable.gooder_logo),
+//                firstOptionLabel = "Register",
+//                firstOptionOnClick = { startRegisterActivity() },
+//                secondOptionLabel = "Login",
+//                secondOptionOnClick = { startLoginActivity() }
+//            )
+            StoreScreen()
         }
     }
     private fun startRegisterActivity() {

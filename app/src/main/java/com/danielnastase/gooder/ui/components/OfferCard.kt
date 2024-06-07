@@ -15,6 +15,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -38,18 +39,18 @@ fun OfferCard(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .shadow(8.dp)
             .background(
                 color = MaterialTheme.colorScheme.tertiary,
-                shape = RoundedCornerShape(10.dp)
+                shape = RoundedCornerShape(20.dp)
             )
             .padding(8.dp)
     ) {
         Image(
             painter = offerPainter,
             contentDescription = "",
+            contentScale = ContentScale.FillBounds,
             modifier = Modifier
-                .size(80.dp)
+                .size(70.dp)
                 .clip(RoundedCornerShape(10.dp))
         )
         Spacer(modifier = Modifier.width(8.dp))
@@ -133,7 +134,7 @@ fun OfferCardPreview() {
             offerPickup = "Between 09:00 PM - 10:00 PM",
             initialPrice = "11.99 lei",
             discountedPrice = "5.99 lei",
-            offerPainter = painterResource(id = R.drawable.sushi_king_logo),
+            offerPainter = painterResource(id = R.drawable.california_rolls),
             {}
         )
     }
