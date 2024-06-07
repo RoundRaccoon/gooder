@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -45,16 +46,30 @@ fun GooderButton(
     }
 }
 
-@Preview
 @Composable
-fun PreviewTest() {
-    GooderTheme {
-        GooderButton(
-            onClick = {},
-            label = "View",
-            labelStyle = MaterialTheme.gooderTypography.semi_bold_12_20,
-            width = 84.dp,
-            height = 32.dp
+fun GooderButtonImage(
+    onClick: () -> Unit,
+    painter: Painter,
+    width: Dp = 32.dp,
+    height: Dp = 32.dp,
+    color: Color = Orange
+) {
+    Button(
+        onClick = { onClick() },
+        colors = ButtonDefaults.buttonColors(
+            containerColor = color,
+            contentColor = Color.White
+        ),
+        shape = RoundedCornerShape(20.dp),
+        modifier = Modifier
+            .size(width, height)
+            .shadow(8.dp, RoundedCornerShape(20.dp)),
+        contentPadding = PaddingValues(0.dp)
+    ) {
+        Icon(
+            painter = painter,
+            contentDescription = "",
+            modifier = Modifier.size(24.dp)
         )
     }
 }

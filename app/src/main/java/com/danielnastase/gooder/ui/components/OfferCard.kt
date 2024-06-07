@@ -34,7 +34,8 @@ fun OfferCard(
     initialPrice: String,
     discountedPrice: String,
     offerPainter: Painter,
-    visitOnClick: () -> Unit
+    visitOnClick: () -> Unit,
+    isReservedOffer: Boolean = false,
 ) {
     Row(
         modifier = Modifier
@@ -108,16 +109,27 @@ fun OfferCard(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                PriceWithDiscount(
-                    initialPrice = initialPrice,
-                    discountedPrice = discountedPrice)
-                GooderButton(
-                    onClick = visitOnClick,
-                    label = "View",
-                    labelStyle = MaterialTheme.gooderTypography.semi_bold_12_20,
-                    width = 84.dp,
-                    height = 32.dp
-                )
+                if (isReservedOffer) {
+                    SavingAmount(savedAmount = discountedPrice)
+                } else {
+                    PriceWithDiscount(
+                        initialPrice = initialPrice,
+                        discountedPrice = discountedPrice)
+                }
+                Row {
+                    GooderButtonImage(
+                        onClick = {},
+                        painter = painterResource(id = R.drawable.qrcode),
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    GooderButton(
+                        onClick = visitOnClick,
+                        label = "View",
+                        labelStyle = MaterialTheme.gooderTypography.semi_bold_12_20,
+                        width = 84.dp,
+                        height = 32.dp
+                    )
+                }
             }
         }
     }

@@ -35,7 +35,7 @@ class WelcomeActivity : ComponentActivity() {
 //                secondOptionLabel = "Login",
 //                secondOptionOnClick = { startLoginActivity() }
 //            )
-            StoreScreen()
+            DiscoverScreen()
         }
     }
     private fun startRegisterActivity() {

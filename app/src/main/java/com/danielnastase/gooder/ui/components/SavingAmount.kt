@@ -8,33 +8,29 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.danielnastase.gooder.ui.theme.GooderTheme
 import com.danielnastase.gooder.ui.theme.gooderTypography
 
 @Composable
-fun PriceWithDiscount(
-    initialPrice: String,
-    discountedPrice: String
+fun SavingAmount(
+    savedAmount: String
 ) {
     Row(
         verticalAlignment = Alignment.Bottom
     ) {
         Text(
-            text = initialPrice,
+            text = "You saved ",
             style = MaterialTheme.gooderTypography.medium_10_12.copy(
-                fontSize = 12.sp,
-                textDecoration = TextDecoration.LineThrough
+//                fontSize = 12.sp,
             ),
             color = MaterialTheme.colorScheme.secondary,
             modifier = Modifier.padding(bottom = 1.dp)
         )
         Text(
-            text = discountedPrice,
+            text = savedAmount,
             style = MaterialTheme.gooderTypography.extra_bold_12_11.copy(
-                fontSize = 18.sp
+//                fontSize = 18.sp
             ),
             color = MaterialTheme.colorScheme.primary
         )
