@@ -2,15 +2,11 @@ package com.danielnastase.gooder.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.danielnastase.gooder.R
 import com.danielnastase.gooder.ui.components.GooderButton
 import com.danielnastase.gooder.ui.components.GooderTextField
 import com.danielnastase.gooder.ui.components.GooderTopAppBar
@@ -18,13 +14,11 @@ import com.danielnastase.gooder.ui.theme.GooderTheme
 import com.danielnastase.gooder.ui.theme.gooderTypography
 
 @Composable
-fun RegisterScreen(
-    createAccount: (String, String, String, String) -> Unit
+fun LoginScreen(
+    loginAccount: (String, String) -> Unit
 ) {
-    var username by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    var confirmPassword by remember { mutableStateOf("") }
 
     GooderTheme {
         Column(
@@ -35,14 +29,8 @@ fun RegisterScreen(
                 .padding(horizontal = 16.dp)
                 .padding(top = 16.dp, bottom = 24.dp)
         ) {
-            GooderTopAppBar("Create new account")
+            GooderTopAppBar("Log into account")
             Spacer(Modifier.height(56.dp))
-            GooderTextField(
-                value = username,
-                onValueChange = { username = it },
-                title = "Username",
-                placeholder = "What is your username?")
-            Spacer(Modifier.height(16.dp))
             GooderTextField(
                 value = email,
                 onValueChange = { email = it },
@@ -53,15 +41,7 @@ fun RegisterScreen(
                 value = password,
                 onValueChange = { password = it },
                 title = "Password",
-                placeholder = "Type password" ,
-                isPassword = true
-            )
-            Spacer(Modifier.height(16.dp))
-            GooderTextField(
-                value = confirmPassword,
-                onValueChange = { confirmPassword = it },
-                title = "Confirm Password",
-                placeholder = "Type password again",
+                placeholder = "Type password",
                 isPassword = true
             )
             Box(
@@ -70,7 +50,7 @@ fun RegisterScreen(
                 contentAlignment = Alignment.BottomCenter
             ) {
                 GooderButton(
-                    onClick = { createAccount(username, email, password, confirmPassword) },
+                    onClick = { loginAccount(email, password) },
                     label = "Proceed",
                     labelStyle = MaterialTheme.gooderTypography.semi_bold_16_24
                 )

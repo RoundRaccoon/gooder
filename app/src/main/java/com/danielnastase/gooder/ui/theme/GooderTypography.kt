@@ -1,7 +1,6 @@
 package com.danielnastase.gooder.ui.theme
 
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
@@ -11,7 +10,6 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.danielnastase.gooder.R
-import org.w3c.dom.Text
 
 val InterFontFamily = FontFamily(
     Font(R.font.inter_regular, FontWeight.Normal),
@@ -25,10 +23,12 @@ val InterFontFamily = FontFamily(
 data class GooderTypography(
     val regular_08_12: TextStyle,
     val medium_08_12: TextStyle,
+    val medium_10_12: TextStyle,
     val bold_12_11: TextStyle,
     val extra_bold_12_11: TextStyle,
     val regular_12_20: TextStyle,
     val semi_bold_12_20: TextStyle,
+    val bold_14_11: TextStyle,
     val regular_16_24: TextStyle,
     val semi_bold_16_24: TextStyle,
     val bold_16_24: TextStyle,
@@ -37,16 +37,20 @@ data class GooderTypography(
     val bold_24_32: TextStyle,
     val black_24_32: TextStyle,
     val bold_32_32: TextStyle,
+    val cardTitle: TextStyle,
+    val cardDetail: TextStyle,
 )
 
 val LocalGooderTypography = staticCompositionLocalOf {
     GooderTypography(
         regular_08_12 = TextStyle.Default,
         medium_08_12 = TextStyle.Default,
+        medium_10_12 = TextStyle.Default,
         bold_12_11 = TextStyle.Default,
         extra_bold_12_11 = TextStyle.Default,
         regular_12_20 = TextStyle.Default,
         semi_bold_12_20 = TextStyle.Default,
+        bold_14_11 = TextStyle.Default,
         regular_16_24 = TextStyle.Default,
         semi_bold_16_24 = TextStyle.Default,
         bold_16_24 = TextStyle.Default,
@@ -54,7 +58,9 @@ val LocalGooderTypography = staticCompositionLocalOf {
         regular_24_32 = TextStyle.Default,
         bold_24_32 = TextStyle.Default,
         black_24_32 = TextStyle.Default,
-        bold_32_32 = TextStyle.Default
+        bold_32_32 = TextStyle.Default,
+        cardTitle = TextStyle.Default,
+        cardDetail = TextStyle.Default
     )
 }
 
@@ -69,6 +75,12 @@ fun buildGooderTypography() = GooderTypography(
         fontFamily = InterFontFamily,
         fontWeight = FontWeight.Medium,
         fontSize = 8.sp,
+        lineHeight = 12.sp
+    ),
+    medium_10_12 = TextStyle(
+        fontFamily = InterFontFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 10.sp,
         lineHeight = 12.sp
     ),
     bold_12_11 = TextStyle(
@@ -94,6 +106,12 @@ fun buildGooderTypography() = GooderTypography(
         fontWeight = FontWeight.SemiBold,
         fontSize = 12.sp,
         lineHeight = 20.sp
+    ),
+    bold_14_11 = TextStyle(
+        fontFamily = InterFontFamily,
+        fontWeight = FontWeight.Bold,
+        fontSize = 14.sp,
+        lineHeight = 11.sp
     ),
     regular_16_24 = TextStyle(
         fontFamily = InterFontFamily,
@@ -143,6 +161,16 @@ fun buildGooderTypography() = GooderTypography(
         fontSize = 32.sp,
         lineHeight = 32.sp
     ),
+    cardTitle = TextStyle(
+        fontFamily = InterFontFamily,
+        fontWeight = FontWeight.Bold,
+        fontSize = 14.sp,
+    ),
+    cardDetail = TextStyle(
+        fontFamily = InterFontFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 10.sp
+    )
 )
 
 val MaterialTheme.gooderTypography: GooderTypography

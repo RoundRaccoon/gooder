@@ -68,12 +68,14 @@ fun WelcomeScreen(
                     GooderButton(
                         onClick = secondOptionOnClick,
                         label = secondOptionLabel,
+                        labelStyle = MaterialTheme.gooderTypography.semi_bold_16_24,
                         color = MaterialTheme.colorScheme.tertiary
                     )
                     Spacer(Modifier.height(16.dp))
                     GooderButton(
                         onClick = firstOptionOnClick,
-                        label = firstOptionLabel
+                        label = firstOptionLabel,
+                        labelStyle = MaterialTheme.gooderTypography.semi_bold_16_24
                     )
                 }
             }
