@@ -22,6 +22,8 @@ import com.danielnastase.gooder.ui.theme.GooderTheme
 class WelcomeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.statusBarColor = getColor(R.color.black)
+
         setContent {
             WelcomeScreen(
                 appName = "gooder",

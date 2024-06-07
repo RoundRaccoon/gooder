@@ -18,6 +18,8 @@ import com.danielnastase.gooder.ui.theme.GooderTheme
 class RegisterActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.statusBarColor = getColor(R.color.black)
+
         setContent {
             RegisterScreen (
                 createAccount = { username, email, password, confirmPassword ->

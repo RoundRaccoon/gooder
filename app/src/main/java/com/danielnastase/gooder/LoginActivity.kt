@@ -16,6 +16,8 @@ import com.danielnastase.gooder.ui.theme.GooderTheme
 class LoginActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.statusBarColor = getColor(R.color.black)
+
         setContent {
             LoginScreen(
                 loginAccount = { email, password ->

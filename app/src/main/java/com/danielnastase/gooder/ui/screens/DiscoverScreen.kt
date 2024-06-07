@@ -33,7 +33,7 @@ fun DiscoverScreen() {
                     offerPainter = painterResource(id = R.drawable.california_rolls),
                     {}
                 )
-                Spacer(Modifier.height(12.dp))
+                Spacer(Modifier.height(24.dp))
             }
         }
     }

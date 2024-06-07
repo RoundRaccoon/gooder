@@ -39,14 +39,3 @@ fun PriceWithDiscount(
         )
     }
 }
-
-@Preview
-@Composable
-fun DefaultPreview() {
-    GooderTheme {
-        PriceWithDiscount(
-            initialPrice = "11.99 lei",
-            discountedPrice = "5.99 lei"
-        )
-    }
-}
