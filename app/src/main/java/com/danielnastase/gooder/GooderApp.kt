@@ -52,9 +52,9 @@ fun NavGraphBuilder.gooderGraph(appState: GooderAppState) {
     composable(GooderRoutes.RegisterScreen.route) {
         RegisterScreen(appState)
     }
-//    composable(GooderRoutes.LoginScreen.route) {
-//        LoginScreen()
-//    }
+    composable(GooderRoutes.LoginScreen.route) {
+        LoginScreen(appState)
+    }
     composable(GooderRoutes.DiscoverScreen.route) {
         DiscoverScreen()
     }
