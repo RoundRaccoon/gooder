@@ -12,6 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.danielnastase.gooder.ui.screens.LoginScreen
 import com.danielnastase.gooder.ui.theme.GooderTheme
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class LoginActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +33,6 @@ class LoginActivity : ComponentActivity() {
         email: String,
         password: String
     ) {
-
+//        Firebase.auth.signInWithEmailAndPassword(email, password)
     }
 }
