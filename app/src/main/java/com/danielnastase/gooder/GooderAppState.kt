@@ -8,4 +8,22 @@ class GooderAppState(val navController: NavHostController) {
     fun navigate(route: String) {
         navController.navigate(route) { launchSingleTop = true }
     }
+
+    fun popUp() {
+        navController.popBackStack()
+    }
+
+    fun navigateAndPopUp(route: String, popUp: String) {
+        navController.navigate(route) {
+            launchSingleTop = true
+            popUpTo(popUp) { inclusive = true }
+        }
+    }
+
+    fun navigateAndClear(route: String) {
+        navController.navigate(route) {
+            launchSingleTop = true
+            popUpTo(0) { inclusive = true }
+        }
+    }
 }

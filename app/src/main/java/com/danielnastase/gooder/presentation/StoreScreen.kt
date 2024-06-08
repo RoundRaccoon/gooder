@@ -1,4 +1,4 @@
-package com.danielnastase.gooder.ui.screens
+package com.danielnastase.gooder.presentation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Spacer

@@ -11,17 +11,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.danielnastase.gooder.GooderAppState
 import com.danielnastase.gooder.ui.theme.GooderTheme
 import com.danielnastase.gooder.ui.theme.gooderTypography
 
 @Composable
 fun WelcomeScreen(
+    appState: GooderAppState,
     appName: String,
     logoPainter: Painter,
     firstOptionLabel: String,
-    firstOptionOnClick: () -> Unit,
+    firstOptionRoute: String,
     secondOptionLabel: String,
-    secondOptionOnClick: () -> Unit,
+    secondOptionRoute: String
 ) {
     GooderTheme {
         Column(
@@ -66,14 +69,14 @@ fun WelcomeScreen(
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     GooderButton(
-                        onClick = secondOptionOnClick,
+                        onClick = { appState.navigate(secondOptionRoute) },
                         label = secondOptionLabel,
                         labelStyle = MaterialTheme.gooderTypography.semi_bold_16_24,
                         color = MaterialTheme.colorScheme.tertiary
                     )
                     Spacer(Modifier.height(16.dp))
                     GooderButton(
-                        onClick = firstOptionOnClick,
+                        onClick = { appState.navigate(firstOptionRoute) },
                         label = firstOptionLabel,
                         labelStyle = MaterialTheme.gooderTypography.semi_bold_16_24
                     )
