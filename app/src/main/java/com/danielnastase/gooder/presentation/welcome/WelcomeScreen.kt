@@ -6,15 +6,23 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.danielnastase.gooder.GooderAppState
+import com.danielnastase.gooder.GooderRoutes
+import com.danielnastase.gooder.presentation.welcome.WelcomeViewModel
 import com.danielnastase.gooder.ui.theme.GooderTheme
 import com.danielnastase.gooder.ui.theme.gooderTypography
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
+
+private const val WELCOME_TIMEOUT = 1L
 
 @Composable
 fun WelcomeScreen(
@@ -24,8 +32,20 @@ fun WelcomeScreen(
     firstOptionLabel: String,
     firstOptionRoute: String,
     secondOptionLabel: String,
-    secondOptionRoute: String
+    secondOptionRoute: String,
+    viewModel: WelcomeViewModel = hiltViewModel()
 ) {
+    LaunchedEffect(Unit) {
+        delay(WELCOME_TIMEOUT)
+        viewModel.onAppStart()
+    }
+
+    LaunchedEffect(Unit) {
+        viewModel.eventFlow.collectLatest {
+            appState.navigateAndClear(GooderRoutes.DiscoverScreen.route)
+        }
+    }
+
     GooderTheme {
         Column(
             modifier = Modifier
