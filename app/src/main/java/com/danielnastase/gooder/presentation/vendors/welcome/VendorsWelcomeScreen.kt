@@ -49,19 +49,23 @@ fun VendorsWelcomeScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(Modifier.height(16.dp))
-            Row (
-            ) {
+            Row {
                 Text(
                     text = "Welcome to ",
                     style = MaterialTheme.gooderTypography.bold_24_32,
                     color = Color.White,
                 )
                 Text(
-                    text = "gooder for vendors",
+                    text = "gooder",
                     style = MaterialTheme.gooderTypography.black_24_32,
                     color = MaterialTheme.colorScheme.primary,
                 )
             }
+            Text(
+                text = "for vendors",
+                style = MaterialTheme.gooderTypography.bold_24_32,
+                color = Color.White,
+            )
             Spacer(Modifier.height(50.dp))
             Image(
                 modifier = Modifier
@@ -84,15 +88,15 @@ fun VendorsWelcomeScreen(
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     GooderButton(
-                        onClick = { appState.navigate(GooderRoutes.RegisterScreen.route) },
-                        label = "Register",
+                        onClick = { appState.navigate(GooderRoutes.VendorsLoginScreen.route) },
+                        label = "Login",
                         labelStyle = MaterialTheme.gooderTypography.semi_bold_16_24,
                         color = MaterialTheme.colorScheme.tertiary
                     )
                     Spacer(Modifier.height(16.dp))
                     GooderButton(
-                        onClick = { appState.navigate(GooderRoutes.LoginScreen.route) },
-                        label = "Login",
+                        onClick = { appState.navigate(GooderRoutes.VendorsRegisterFirstStepScreen.route) },
+                        label = "Register vendor",
                         labelStyle = MaterialTheme.gooderTypography.semi_bold_16_24
                     )
                 }

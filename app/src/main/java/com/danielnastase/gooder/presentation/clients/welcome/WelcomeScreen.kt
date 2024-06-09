@@ -48,8 +48,7 @@ fun WelcomeScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(Modifier.height(16.dp))
-            Row (
-            ) {
+            Row {
                 Text(
                     text = "Welcome to ",
                     style = MaterialTheme.gooderTypography.bold_24_32,
@@ -83,15 +82,15 @@ fun WelcomeScreen(
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     GooderButton(
-                        onClick = { appState.navigate(GooderRoutes.RegisterScreen.route) },
-                        label = "Register",
+                        onClick = { appState.navigate(GooderRoutes.LoginScreen.route) },
+                        label = "Login",
                         labelStyle = MaterialTheme.gooderTypography.semi_bold_16_24,
                         color = MaterialTheme.colorScheme.tertiary
                     )
                     Spacer(Modifier.height(16.dp))
                     GooderButton(
-                        onClick = { appState.navigate(GooderRoutes.LoginScreen.route) },
-                        label = "Login",
+                        onClick = { appState.navigate(GooderRoutes.RegisterScreen.route) },
+                        label = "Register",
                         labelStyle = MaterialTheme.gooderTypography.semi_bold_16_24
                     )
                 }

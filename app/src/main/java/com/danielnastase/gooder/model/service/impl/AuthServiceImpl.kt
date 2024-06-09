@@ -1,5 +1,6 @@
 package com.danielnastase.gooder.model.service.impl
 
+import android.util.Log
 import com.danielnastase.gooder.model.User
 import com.danielnastase.gooder.model.service.AuthService
 import com.google.firebase.auth.ktx.auth
@@ -24,6 +25,7 @@ class AuthServiceImpl @Inject constructor() : AuthService {
 
     override suspend fun createUser(email: String, password: String) {
         Firebase.auth.createUserWithEmailAndPassword(email, password).await()
+        Log.i(null, currentUserId)
     }
 
     override suspend fun signIn(email: String, password: String) {
@@ -33,5 +35,4 @@ class AuthServiceImpl @Inject constructor() : AuthService {
     override suspend fun signOut() {
         Firebase.auth.signOut()
     }
-
 }
