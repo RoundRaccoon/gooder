@@ -1,4 +1,4 @@
-package com.danielnastase.gooder.presentation.login
+package com.danielnastase.gooder.presentation.clients.login
 
 sealed class LoginEvent {
     data class EnteredEmail(val value: String): LoginEvent()

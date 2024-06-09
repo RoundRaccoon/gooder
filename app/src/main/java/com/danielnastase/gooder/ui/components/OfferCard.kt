@@ -117,11 +117,13 @@ fun OfferCard(
                         discountedPrice = discountedPrice)
                 }
                 Row {
-                    GooderButtonImage(
-                        onClick = {},
-                        painter = painterResource(id = R.drawable.qrcode),
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
+                    if (isReservedOffer) {
+                        GooderButtonImage(
+                            onClick = {},
+                            painter = painterResource(id = R.drawable.qrcode),
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                    }
                     GooderButton(
                         onClick = visitOnClick,
                         label = "View",

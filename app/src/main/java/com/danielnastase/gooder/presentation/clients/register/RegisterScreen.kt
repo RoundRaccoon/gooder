@@ -1,4 +1,4 @@
-package com.danielnastase.gooder.presentation
+package com.danielnastase.gooder.presentation.clients.register
 
 import android.widget.Toast
 import androidx.compose.foundation.background
@@ -13,9 +13,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.danielnastase.gooder.GooderAppState
 import com.danielnastase.gooder.GooderRoutes
-import com.danielnastase.gooder.presentation.register.RegisterEvent
-import com.danielnastase.gooder.presentation.register.RegisterViewModel
-import com.danielnastase.gooder.presentation.register.areFieldsFilled
+import com.danielnastase.gooder.presentation.clients.register.RegisterEvent
+import com.danielnastase.gooder.presentation.clients.register.RegisterViewModel
+import com.danielnastase.gooder.presentation.clients.register.areFieldsFilled
 import com.danielnastase.gooder.ui.components.GooderButton
 import com.danielnastase.gooder.ui.components.GooderTextField
 import com.danielnastase.gooder.ui.components.GooderTopAppBar

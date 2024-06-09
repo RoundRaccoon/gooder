@@ -30,8 +30,7 @@ fun DiscoverScreen() {
                     initialPrice = "11.99 lei",
                     discountedPrice = "5.99 lei",
                     offerPainter = painterResource(id = R.drawable.california_rolls),
-                    {},
-                    true
+                    {}
                 )
                 Spacer(Modifier.height(24.dp))
             }

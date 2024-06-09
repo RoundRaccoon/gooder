@@ -10,13 +10,13 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import com.danielnastase.gooder.GooderAppState
 import com.danielnastase.gooder.GooderRoutes
-import com.danielnastase.gooder.presentation.welcome.WelcomeViewModel
+import com.danielnastase.gooder.R
+import com.danielnastase.gooder.presentation.clients.welcome.WelcomeViewModel
 import com.danielnastase.gooder.ui.theme.GooderTheme
 import com.danielnastase.gooder.ui.theme.gooderTypography
 import kotlinx.coroutines.delay
@@ -27,12 +27,6 @@ private const val WELCOME_TIMEOUT = 1L
 @Composable
 fun WelcomeScreen(
     appState: GooderAppState,
-    appName: String,
-    logoPainter: Painter,
-    firstOptionLabel: String,
-    firstOptionRoute: String,
-    secondOptionLabel: String,
-    secondOptionRoute: String,
     viewModel: WelcomeViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
@@ -62,7 +56,7 @@ fun WelcomeScreen(
                     color = Color.White,
                 )
                 Text(
-                    text = appName,
+                    text = "gooder",
                     style = MaterialTheme.gooderTypography.black_24_32,
                     color = MaterialTheme.colorScheme.primary,
                 )
@@ -71,7 +65,7 @@ fun WelcomeScreen(
             Image(
                 modifier = Modifier
                     .padding(horizontal = 5.dp),
-                painter = logoPainter,
+                painter = painterResource(id = R.drawable.gooder_logo),
                 contentDescription = "Gooder Logo")
             Box(
                 modifier = Modifier
@@ -89,15 +83,15 @@ fun WelcomeScreen(
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     GooderButton(
-                        onClick = { appState.navigate(secondOptionRoute) },
-                        label = secondOptionLabel,
+                        onClick = { appState.navigate(GooderRoutes.RegisterScreen.route) },
+                        label = "Register",
                         labelStyle = MaterialTheme.gooderTypography.semi_bold_16_24,
                         color = MaterialTheme.colorScheme.tertiary
                     )
                     Spacer(Modifier.height(16.dp))
                     GooderButton(
-                        onClick = { appState.navigate(firstOptionRoute) },
-                        label = firstOptionLabel,
+                        onClick = { appState.navigate(GooderRoutes.LoginScreen.route) },
+                        label = "Login",
                         labelStyle = MaterialTheme.gooderTypography.semi_bold_16_24
                     )
                 }

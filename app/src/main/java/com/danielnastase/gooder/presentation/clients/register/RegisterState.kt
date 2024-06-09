@@ -1,4 +1,4 @@
-package com.danielnastase.gooder.presentation.register
+package com.danielnastase.gooder.presentation.clients.register
 
 data class RegisterState (
     val username: String = "",

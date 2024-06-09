@@ -12,8 +12,9 @@ import com.danielnastase.gooder.GooderAppState
 import com.danielnastase.gooder.GooderRoutes
 import com.danielnastase.gooder.R
 import com.danielnastase.gooder.presentation.DiscoverScreen
-import com.danielnastase.gooder.presentation.LoginScreen
-import com.danielnastase.gooder.presentation.RegisterScreen
+import com.danielnastase.gooder.presentation.clients.login.LoginScreen
+import com.danielnastase.gooder.presentation.clients.register.RegisterScreen
+import com.danielnastase.gooder.presentation.vendors.welcome.VendorsWelcomeScreen
 import com.danielnastase.gooder.ui.components.WelcomeScreen
 import com.danielnastase.gooder.ui.theme.GooderTheme
 
@@ -24,7 +25,7 @@ fun GooderApp() {
 
         NavHost(
             navController = appState.navController,
-            startDestination = GooderRoutes.WelcomeScreen.route,
+            startDestination = GooderRoutes.WelcomeVendorsScreen.route,
         ) {
             gooderGraph(appState)
         }
@@ -39,15 +40,7 @@ fun rememberAppState(navController: NavHostController = rememberNavController())
 
 fun NavGraphBuilder.gooderGraph(appState: GooderAppState) {
     composable(GooderRoutes.WelcomeScreen.route) {
-        WelcomeScreen(
-            appState = appState,
-            appName = "gooder",
-            logoPainter = painterResource(id = R.drawable.gooder_logo),
-            firstOptionLabel = "Login",
-            firstOptionRoute = GooderRoutes.LoginScreen.route,
-            secondOptionLabel = "Register",
-            secondOptionRoute = GooderRoutes.RegisterScreen.route
-        )
+        WelcomeScreen(appState = appState)
     }
     composable(GooderRoutes.RegisterScreen.route) {
         RegisterScreen(appState)
@@ -57,5 +50,8 @@ fun NavGraphBuilder.gooderGraph(appState: GooderAppState) {
     }
     composable(GooderRoutes.DiscoverScreen.route) {
         DiscoverScreen()
+    }
+    composable(GooderRoutes.WelcomeVendorsScreen.route) {
+        VendorsWelcomeScreen(appState = appState)
     }
 }

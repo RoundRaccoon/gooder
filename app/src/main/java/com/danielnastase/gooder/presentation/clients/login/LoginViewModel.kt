@@ -1,4 +1,4 @@
-package com.danielnastase.gooder.presentation.register
+package com.danielnastase.gooder.presentation.clients.login
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -12,38 +12,28 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RegisterViewModel @Inject constructor(
+class LoginViewModel @Inject constructor(
     private val authService: AuthService
 ) : ViewModel() {
-    private val _state = mutableStateOf(RegisterState())
-    val state: State<RegisterState> = _state
+    private val _state = mutableStateOf(LoginState())
+    val state: State<LoginState> = _state
 
     private val _eventFlow = MutableSharedFlow<UiEvent>()
     val eventFlow = _eventFlow.asSharedFlow()
 
-    fun onEvent(event: RegisterEvent) {
+    fun onEvent(event: LoginEvent) {
         when (event) {
-            is RegisterEvent.EnteredUsername -> {
-                _state.value = state.value.copy(
-                    username = event.value
-                )
-            }
-            is RegisterEvent.EnteredEmail -> {
+            is LoginEvent.EnteredEmail -> {
                 _state.value = state.value.copy(
                     email = event.value
                 )
             }
-            is RegisterEvent.EnteredPassword -> {
+            is LoginEvent.EnteredPassword -> {
                 _state.value = state.value.copy(
                     password = event.value
                 )
             }
-            is RegisterEvent.EnteredConfirmPassword -> {
-                _state.value = state.value.copy(
-                    confirmPassword = event.value
-                )
-            }
-            is RegisterEvent.RegisterAccount -> {
+            is LoginEvent.LoginAccount -> {
                 if (!_state.value.areFieldsFilled()) {
                     // Button is grayed out
                     return
@@ -54,41 +44,35 @@ class RegisterViewModel @Inject constructor(
                         if (!validateInputs()) {
                             return@launch
                         }
-                        registerAccount()
+                        loginAccount()
                     } catch (e: Exception) {
                         _eventFlow.emit(
-                            UiEvent.RegisterUnsuccessful(
-                                e.message ?: "Error at account creation"
+                            UiEvent.LoginUnsuccessful(
+                                e.message ?: "Error at authentication"
                             )
                         )
                     }
-
                 }
             }
         }
     }
 
-    private suspend fun validateInputs(): Boolean {
-        if (_state.value.password != _state.value.confirmPassword) {
-            _eventFlow.emit(UiEvent.RegisterUnsuccessful("Passwords do not match"))
-            return false
-        }
-
+    private suspend fun validateInputs(): Boolean{
         if (!_state.value.email.contains('@')) {
-            _eventFlow.emit(UiEvent.RegisterUnsuccessful("Email is not valid"))
+            _eventFlow.emit(UiEvent.LoginUnsuccessful("Email is not valid"))
             return false
         }
 
         return true
     }
 
-    private suspend fun registerAccount() {
-        authService.createUser(_state.value.email, _state.value.password)
-        _eventFlow.emit(UiEvent.RegisterSuccessful)
+    private suspend fun loginAccount() {
+        authService.signIn(_state.value.email, _state.value.password)
+        _eventFlow.emit(UiEvent.LoginSuccessful)
     }
 
     sealed class UiEvent{
-        data class RegisterUnsuccessful(val message: String): UiEvent()
-        object RegisterSuccessful : UiEvent()
+        data class LoginUnsuccessful(val message: String): UiEvent()
+        object LoginSuccessful : UiEvent()
     }
 }

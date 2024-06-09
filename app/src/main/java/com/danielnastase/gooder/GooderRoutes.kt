@@ -5,4 +5,5 @@ sealed class GooderRoutes(val route: String) {
     object LoginScreen: GooderRoutes("login_screen")
     object RegisterScreen: GooderRoutes("register_screen")
     object DiscoverScreen: GooderRoutes("discover_screen")
+    object WelcomeVendorsScreen: GooderRoutes("welcome_vendors_screen")
 }

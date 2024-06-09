@@ -1,4 +1,4 @@
-package com.danielnastase.gooder.presentation.register
+package com.danielnastase.gooder.presentation.clients.register
 
 sealed class RegisterEvent {
     data class EnteredUsername(val value: String): RegisterEvent()

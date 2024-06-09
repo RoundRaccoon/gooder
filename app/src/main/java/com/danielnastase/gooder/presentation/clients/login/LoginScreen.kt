@@ -1,4 +1,4 @@
-package com.danielnastase.gooder.presentation
+package com.danielnastase.gooder.presentation.clients.login
 
 import android.widget.Toast
 import androidx.compose.foundation.background
@@ -12,10 +12,10 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.danielnastase.gooder.GooderAppState
 import com.danielnastase.gooder.GooderRoutes
-import com.danielnastase.gooder.presentation.login.LoginEvent
-import com.danielnastase.gooder.presentation.login.LoginViewModel
-import com.danielnastase.gooder.presentation.login.areFieldsFilled
-import com.danielnastase.gooder.presentation.register.areFieldsFilled
+import com.danielnastase.gooder.presentation.clients.login.LoginEvent
+import com.danielnastase.gooder.presentation.clients.login.LoginViewModel
+import com.danielnastase.gooder.presentation.clients.login.areFieldsFilled
+import com.danielnastase.gooder.presentation.clients.register.areFieldsFilled
 import com.danielnastase.gooder.ui.components.GooderButton
 import com.danielnastase.gooder.ui.components.GooderTextField
 import com.danielnastase.gooder.ui.components.GooderTopAppBar

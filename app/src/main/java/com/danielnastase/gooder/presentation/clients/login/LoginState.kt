@@ -1,4 +1,4 @@
-package com.danielnastase.gooder.presentation.login
+package com.danielnastase.gooder.presentation.clients.login
 
 data class LoginState (
     val email: String = "",
