@@ -10,6 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import com.danielnastase.gooder.GooderAppState
 import com.danielnastase.gooder.GooderRoutes
 import com.danielnastase.gooder.presentation.DiscoverScreen
+import com.danielnastase.gooder.presentation.clients.HomeScreen
 import com.danielnastase.gooder.presentation.clients.login.LoginScreen
 import com.danielnastase.gooder.presentation.clients.register.RegisterScreen
 import com.danielnastase.gooder.presentation.vendors.register1.VendorsRegisterFirstStepScreen
@@ -48,7 +49,7 @@ fun NavGraphBuilder.gooderGraph(appState: GooderAppState) {
         LoginScreen(appState)
     }
     composable(GooderRoutes.DiscoverScreen.route) {
-        DiscoverScreen()
+        HomeScreen(appState)
     }
     composable(GooderRoutes.VendorsWelcomeScreen.route) {
         VendorsWelcomeScreen(appState)

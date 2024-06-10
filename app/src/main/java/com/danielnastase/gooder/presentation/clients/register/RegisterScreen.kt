@@ -3,13 +3,21 @@ package com.danielnastase.gooder.presentation.clients.register
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.danielnastase.gooder.GooderAppState
 import com.danielnastase.gooder.GooderRoutes
@@ -30,15 +38,37 @@ fun RegisterScreen(
 ) {
     val state = viewModel.state.value
     val context = LocalContext.current
+    val showLoadingDialog = remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
         viewModel.eventFlow.collectLatest { event ->
+            showLoadingDialog.value = false
             when (event) {
                 is RegisterViewModel.UiEvent.RegisterSuccessful -> {
                     appState.navigateAndClear(GooderRoutes.DiscoverScreen.route)
                 }
                 is RegisterViewModel.UiEvent.RegisterUnsuccessful -> {
                     Toast.makeText(context, event.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    if (true) {
+        Dialog(onDismissRequest = { }) {
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .size(160.dp)
+                    .background(Color.White)
+                    .clip(RoundedCornerShape(15.dp))
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.fillMaxSize().padding(20.dp)
+                ) {
+                    CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
+                    Text(text = "Setting up your account...")
                 }
             }
         }
@@ -91,7 +121,10 @@ fun RegisterScreen(
                 contentAlignment = Alignment.BottomCenter
             ) {
                 GooderButton(
-                    onClick = { viewModel.onEvent(RegisterEvent.RegisterAccount) },
+                    onClick = {
+                        showLoadingDialog.value = true
+                        viewModel.onEvent(RegisterEvent.RegisterAccount)
+                    },
                     label = "Proceed",
                     labelStyle = MaterialTheme.gooderTypography.semi_bold_16_24,
                     color = if (state.areFieldsFilled()) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondary

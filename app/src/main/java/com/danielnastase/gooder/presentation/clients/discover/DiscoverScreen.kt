@@ -8,12 +8,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.danielnastase.gooder.GooderAppState
 import com.danielnastase.gooder.R
 import com.danielnastase.gooder.ui.components.OfferCard
 import com.danielnastase.gooder.ui.theme.GooderTheme
 
 @Composable
-fun DiscoverScreen() {
+fun DiscoverScreen(
+    homeState: GooderAppState
+) {
     GooderTheme {
         LazyColumn (
             modifier = Modifier

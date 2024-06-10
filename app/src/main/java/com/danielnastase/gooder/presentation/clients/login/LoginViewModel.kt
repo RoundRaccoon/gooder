@@ -44,7 +44,8 @@ class LoginViewModel @Inject constructor(
                         if (!validateInputs()) {
                             return@launch
                         }
-                        loginAccount()
+                        authService.signIn(_state.value.email, _state.value.password)
+                        _eventFlow.emit(UiEvent.LoginSuccessful)
                     } catch (e: Exception) {
                         _eventFlow.emit(
                             UiEvent.LoginUnsuccessful(
@@ -64,11 +65,6 @@ class LoginViewModel @Inject constructor(
         }
 
         return true
-    }
-
-    private suspend fun loginAccount() {
-        authService.signIn(_state.value.email, _state.value.password)
-        _eventFlow.emit(UiEvent.LoginSuccessful)
     }
 
     sealed class UiEvent{

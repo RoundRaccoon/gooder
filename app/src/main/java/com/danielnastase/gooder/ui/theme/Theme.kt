@@ -13,7 +13,7 @@ private val ColorScheme = lightColorScheme(
     primary = Orange,
     secondary = LightGray,
     tertiary = DarkGray,
-    background = EerieBlack
+    background = EerieBlack,
 )
 
 @Composable

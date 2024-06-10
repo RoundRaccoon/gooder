@@ -22,7 +22,7 @@ import com.danielnastase.gooder.ui.theme.gooderTypography
 fun GooderButton(
     onClick: () -> Unit,
     label: String = "",
-    labelStyle: TextStyle,
+    labelStyle: TextStyle = MaterialTheme.gooderTypography.semi_bold_12_20,
     width: Dp = 328.dp,
     height: Dp = 48.dp,
     color: Color = Orange
