@@ -25,6 +25,7 @@ import com.danielnastase.gooder.presentation.clients.register.RegisterEvent
 import com.danielnastase.gooder.presentation.clients.register.RegisterViewModel
 import com.danielnastase.gooder.presentation.clients.register.areFieldsFilled
 import com.danielnastase.gooder.ui.components.GooderButton
+import com.danielnastase.gooder.ui.components.GooderLoadingDialog
 import com.danielnastase.gooder.ui.components.GooderTextField
 import com.danielnastase.gooder.ui.components.GooderTopAppBar
 import com.danielnastase.gooder.ui.theme.GooderTheme
@@ -37,8 +38,10 @@ fun RegisterScreen(
     viewModel: RegisterViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
-    val context = LocalContext.current
     val showLoadingDialog = remember { mutableStateOf(false) }
+    val registerUnsuccessfulMessage = remember {
+        mutableStateOf("")
+    }
 
     LaunchedEffect(Unit) {
         viewModel.eventFlow.collectLatest { event ->
@@ -48,31 +51,13 @@ fun RegisterScreen(
                     appState.navigateAndClear(GooderRoutes.DiscoverScreen.route)
                 }
                 is RegisterViewModel.UiEvent.RegisterUnsuccessful -> {
-                    Toast.makeText(context, event.message, Toast.LENGTH_SHORT).show()
+                    registerUnsuccessfulMessage.value = event.message
                 }
             }
         }
     }
 
-    if (true) {
-        Dialog(onDismissRequest = { }) {
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier
-                    .size(160.dp)
-                    .background(Color.White)
-                    .clip(RoundedCornerShape(15.dp))
-            ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier.fillMaxSize().padding(20.dp)
-                ) {
-                    CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
-                    Text(text = "Setting up your account...")
-                }
-            }
-        }
-    }
+    GooderLoadingDialog(showLoadingDialog)
 
     GooderTheme {
         Column(
@@ -115,6 +100,14 @@ fun RegisterScreen(
                 placeholder = "Type password again",
                 isPassword = true
             )
+            Spacer(Modifier.height(16.dp))
+            if (registerUnsuccessfulMessage.value.isNotEmpty()) {
+                Text(
+                    registerUnsuccessfulMessage.value,
+                    color = Color.Red,
+                    style = MaterialTheme.gooderTypography.semi_bold_16_24
+                )
+            }
             Box(
                 modifier = Modifier
                     .fillMaxSize(),

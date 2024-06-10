@@ -59,7 +59,7 @@ class VendorsRegisterFirstStepViewModel @Inject constructor(
                     } catch (e: Exception) {
                         _eventFlow.emit(
                             UiEvent.CredentialsDenied(
-                                e.message ?: "Unknown error occurred"
+                                e.localizedMessage ?: "Unknown error occurred"
                             )
                         )
                     }

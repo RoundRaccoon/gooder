@@ -60,7 +60,7 @@ class RegisterViewModel @Inject constructor(
                     } catch (e: Exception) {
                         _eventFlow.emit(
                             UiEvent.RegisterUnsuccessful(
-                                e.message ?: "Error at account creation"
+                                e.localizedMessage ?: "Error at account creation"
                             )
                         )
                     }

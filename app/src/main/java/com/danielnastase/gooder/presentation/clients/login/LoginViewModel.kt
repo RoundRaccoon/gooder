@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.danielnastase.gooder.model.service.AuthService
+import com.google.firebase.FirebaseException
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -49,7 +50,7 @@ class LoginViewModel @Inject constructor(
                     } catch (e: Exception) {
                         _eventFlow.emit(
                             UiEvent.LoginUnsuccessful(
-                                e.message ?: "Error at authentication"
+                                e.localizedMessage ?: "Error at authentication"
                             )
                         )
                     }
