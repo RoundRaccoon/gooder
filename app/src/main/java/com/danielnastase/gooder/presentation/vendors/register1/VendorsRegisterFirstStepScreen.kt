@@ -16,6 +16,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.danielnastase.gooder.GooderAppState
+import com.danielnastase.gooder.GooderRoutes
 import com.danielnastase.gooder.ui.components.GooderButton
 import com.danielnastase.gooder.ui.components.GooderLoadingDialog
 import com.danielnastase.gooder.ui.components.GooderTextField
@@ -29,7 +30,7 @@ fun VendorsRegisterFirstStepScreen(
     appState: GooderAppState,
     viewModel: VendorsRegisterFirstStepViewModel = hiltViewModel()
 ) {
-    val state = viewModel.state.value
+    val state = viewModel.state
     val showLoadingDialog = remember { mutableStateOf(false) }
     val credentialsDeniedMessage = remember {
         mutableStateOf("")
@@ -40,7 +41,11 @@ fun VendorsRegisterFirstStepScreen(
             showLoadingDialog.value = false
             when (event) {
                 is VendorsRegisterFirstStepViewModel.UiEvent.CredentialsAccepted -> {
-                    TODO("Navigate to next screen")
+                    appState.navigate(
+                        GooderRoutes.VendorsRegisterSecondStepScreen.route +
+                                "/${state.value.email}" +
+                                "/${state.value.password}"
+                    )
                 }
                 is VendorsRegisterFirstStepViewModel.UiEvent.CredentialsDenied -> {
                     credentialsDeniedMessage.value = event.message
@@ -66,13 +71,13 @@ fun VendorsRegisterFirstStepScreen(
             )
             Spacer(Modifier.height(56.dp))
             GooderTextField(
-                value = state.email,
+                value = state.value.email,
                 onValueChange = { viewModel.onEvent(VendorsRegisterFirstStepEvent.EnteredEmail(it)) },
                 title = "Email",
                 placeholder = "What is your email?")
             Spacer(Modifier.height(16.dp))
             GooderTextField(
-                value = state.password,
+                value = state.value.password,
                 onValueChange = { viewModel.onEvent(VendorsRegisterFirstStepEvent.EnteredPassword(it)) },
                 title = "Password",
                 placeholder = "Type password" ,
@@ -80,7 +85,7 @@ fun VendorsRegisterFirstStepScreen(
             )
             Spacer(Modifier.height(16.dp))
             GooderTextField(
-                value = state.confirmPassword,
+                value = state.value.confirmPassword,
                 onValueChange = { viewModel.onEvent(VendorsRegisterFirstStepEvent.EnteredConfirmPassword(it)) },
                 title = "Confirm Password",
                 placeholder = "Type password again",
@@ -105,7 +110,7 @@ fun VendorsRegisterFirstStepScreen(
                         viewModel.onEvent(VendorsRegisterFirstStepEvent.PressedProceed) },
                     label = "Proceed",
                     labelStyle = MaterialTheme.gooderTypography.semi_bold_16_24,
-                    color = if (state.areFieldsFilled()) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondary
+                    color = if (state.value.areFieldsFilled()) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondary
                 )
             }
         }

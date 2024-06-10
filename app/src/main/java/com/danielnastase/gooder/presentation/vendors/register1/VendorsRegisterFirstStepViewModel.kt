@@ -54,7 +54,6 @@ class VendorsRegisterFirstStepViewModel @Inject constructor(
                             _eventFlow.emit(UiEvent.CredentialsDenied("Email already in use"))
                             return@launch
                         }
-                        TODO("Create package to send to second step viewModel")
                         _eventFlow.emit(UiEvent.CredentialsAccepted)
                     } catch (e: Exception) {
                         _eventFlow.emit(
@@ -71,6 +70,11 @@ class VendorsRegisterFirstStepViewModel @Inject constructor(
     private suspend fun validateInputs(): Boolean {
         if (_state.value.password != _state.value.confirmPassword) {
             _eventFlow.emit(UiEvent.CredentialsDenied("Passwords do not match"))
+            return false
+        }
+
+        if (state.value.password.length < 6) {
+            _eventFlow.emit(UiEvent.CredentialsDenied("Password should be at least 6 characters"))
             return false
         }
 
