@@ -36,11 +36,19 @@ class VendorsRegisterSecondStepViewModel @Inject constructor(
                     name = event.value
                 )
             }
-            is VendorsRegisterSecondStepEvent.UploadLogo -> {
-
+            is VendorsRegisterSecondStepEvent.ResultLogo -> {
+                if (event.uri == null)
+                    return
+                _state.value = state.value.copy(
+                    logo = event.uri
+                )
             }
-            is VendorsRegisterSecondStepEvent.UploadBanner -> {
-
+            is VendorsRegisterSecondStepEvent.ResultBanner -> {
+                if (event.uri == null)
+                    return
+                _state.value = state.value.copy(
+                    banner = event.uri
+                )
             }
             is VendorsRegisterSecondStepEvent.PressedProceed -> {
 //                if (_state.value.name.isEmpty()) {

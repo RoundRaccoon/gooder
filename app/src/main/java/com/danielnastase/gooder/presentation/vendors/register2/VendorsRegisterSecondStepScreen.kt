@@ -1,5 +1,8 @@
 package com.danielnastase.gooder.presentation.vendors.register2
 
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Divider
@@ -16,10 +19,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.danielnastase.gooder.GooderAppState
-import com.danielnastase.gooder.GooderRoutes
 import com.danielnastase.gooder.R
-import com.danielnastase.gooder.presentation.vendors.register1.VendorsRegisterFirstStepEvent
-import com.danielnastase.gooder.presentation.vendors.register1.areFieldsFilled
 import com.danielnastase.gooder.ui.components.*
 import com.danielnastase.gooder.ui.theme.GooderTheme
 import com.danielnastase.gooder.ui.theme.gooderTypography
@@ -30,8 +30,18 @@ fun VendorsRegisterSecondStepScreen(
     appState: GooderAppState,
     viewModel: VendorsRegisterSecondStepViewModel = hiltViewModel()
 ) {
-    val state = viewModel.state.value
+    val state = viewModel.state
     val showLoadingDialog = remember { mutableStateOf(false) }
+
+    val logoPickerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.PickVisualMedia(),
+        onResult = { viewModel.onEvent(VendorsRegisterSecondStepEvent.ResultLogo(it)) }
+    )
+
+    val bannerPickerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.PickVisualMedia(),
+        onResult = { viewModel.onEvent(VendorsRegisterSecondStepEvent.ResultBanner(it)) }
+    )
 
     LaunchedEffect(Unit) {
         viewModel.eventFlow.collectLatest { event ->
@@ -57,7 +67,7 @@ fun VendorsRegisterSecondStepScreen(
             )
             Spacer(Modifier.height(56.dp))
             GooderTextField(
-                value = state.name,
+                value = state.value.name,
                 onValueChange = { viewModel.onEvent(VendorsRegisterSecondStepEvent.EnteredName(it)) },
                 title = "Vendor name",
                 placeholder = "What is your your business?")
@@ -68,13 +78,17 @@ fun VendorsRegisterSecondStepScreen(
                     .fillMaxWidth()
             ) {
                 GooderButton(
-                    onClick = { viewModel.onEvent(VendorsRegisterSecondStepEvent.UploadLogo) },
+                    onClick = { logoPickerLauncher.launch(
+                        PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                    ) },
                     label = "Upload Logo",
                     labelStyle = MaterialTheme.gooderTypography.semi_bold_16_24,
                     width = 160.dp
                 )
                 GooderButton(
-                    onClick = { viewModel.onEvent(VendorsRegisterSecondStepEvent.UploadBanner) },
+                    onClick = { bannerPickerLauncher.launch(
+                        PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                    ) },
                     label = "Upload Banner",
                     labelStyle = MaterialTheme.gooderTypography.semi_bold_16_24,
                     width = 160.dp
@@ -96,15 +110,12 @@ fun VendorsRegisterSecondStepScreen(
                 )
             }
             Spacer(Modifier.height(20.dp))
-            StoreCard(
-                storeName = "Sushi King",
-                storeDistance = "500 m",
-                storeProducts = "10 products",
-                isFavourite = true,
-                storeBannerPainter = painterResource(id = R.drawable.sushi_king_banner),
-                storeLogoPainter = painterResource(id = R.drawable.sushi_king_logo),
-                visitOnClick = {}
-            )
+
+            PreviewStoreCard(
+                name = state.value.name,
+                logo = state.value.logo,
+                banner = state.value.banner)
+
             Box(
                 modifier = Modifier
                     .fillMaxSize(),
@@ -116,7 +127,7 @@ fun VendorsRegisterSecondStepScreen(
                         viewModel.onEvent(VendorsRegisterSecondStepEvent.PressedProceed) },
                     label = "Proceed",
                     labelStyle = MaterialTheme.gooderTypography.semi_bold_16_24,
-                    color = if (state.name.isNotEmpty()) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondary
+                    color = if (state.value.name.isNotEmpty()) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondary
                 )
             }
         }

@@ -2,6 +2,7 @@ package com.danielnastase.gooder.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -16,12 +17,14 @@ import com.danielnastase.gooder.R
 
 @Composable
 fun FavoriteButton(
-    isFavorite: Boolean
+    isFavorite: Boolean,
+    onClick: () -> Unit
 ) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(top = 10.dp, end = 12.dp),
+            .padding(top = 10.dp, end = 12.dp)
+            .clickable { onClick() },
         contentAlignment = Alignment.TopEnd
     ) {
         Box(
