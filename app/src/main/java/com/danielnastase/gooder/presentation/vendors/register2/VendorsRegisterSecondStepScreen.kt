@@ -15,11 +15,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.danielnastase.gooder.GooderAppState
-import com.danielnastase.gooder.R
 import com.danielnastase.gooder.ui.components.*
 import com.danielnastase.gooder.ui.theme.GooderTheme
 import com.danielnastase.gooder.ui.theme.gooderTypography
@@ -113,8 +111,8 @@ fun VendorsRegisterSecondStepScreen(
 
             PreviewStoreCard(
                 name = state.value.name,
-                logo = state.value.logo,
-                banner = state.value.banner)
+                logo = state.value.logoUri,
+                banner = state.value.bannerUri)
 
             Box(
                 modifier = Modifier

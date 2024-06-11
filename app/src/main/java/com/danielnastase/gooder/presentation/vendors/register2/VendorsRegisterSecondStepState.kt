@@ -4,6 +4,6 @@ import android.net.Uri
 
 data class VendorsRegisterSecondStepState(
     val name: String = "",
-    val logo: Uri? = null,
-    val banner: Uri? = null
+    val logoUri: Uri? = null,
+    val bannerUri: Uri? = null
 )
